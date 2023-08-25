@@ -11,6 +11,8 @@ import cookieParser from 'cookie-parser';
  */
 const ServiceLogin = async (data:UserBasic) => {
     const prisma = await new PrismaClient();
+
+
     const found = await prisma.users.findFirst({
         where: {
             email: data.email
@@ -23,7 +25,7 @@ const ServiceLogin = async (data:UserBasic) => {
     if(!hash) throw new Error('ERR_VERIFY_DATA_PASSWORD');
 
     const token = await jwt.sign(
-        { userid:found.userId.toString },
+        { user:found },
         'HISTORY_APP',
         {
             expiresIn: '2 days'
@@ -53,6 +55,8 @@ const ServiceRegister = async (save:UserBasic) => {
     if (found) throw new Error('ERR_USER_EXITS'); 
 
     save.password = await bcrypt.hash(save.password, 9);
+    console.log(save);
+
     const result = await prisma.users.create({ 
         data:{ 
             email: save.email,

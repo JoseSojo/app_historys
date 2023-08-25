@@ -5,10 +5,12 @@ import { RequestExtended } from '../interfaces/app.interface';
 export const Protected = async (req:RequestExtended, res:Response, next:NextFunction) => {
     try {
         const token = req.header('token');
+        console.log(token);
 
         if (!token) throw new Error('ERR_NOT_AUTHORIZED');
 
-        const decoded = jwt.verify(token, 'SECRET_KEY'); // Decodificando el TOKEN
+        const decoded = jwt.verify(token, 'HISTORY_APP'); // Decodificando el TOKEN
+        console.log(decoded);
         req.user = decoded;
         next()
 

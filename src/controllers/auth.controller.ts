@@ -29,7 +29,8 @@ const RegisterCtrl = async (req:Request, res:Response) => {
         const checkRegister:UserBasic = {
             email: req.body.email,
             password: req.body.password,
-            username: req.body.username
+            username: req.body.username,
+            roleId: 2
         }
         const responseService = await ServiceRegister(checkRegister);
 
@@ -37,7 +38,7 @@ const RegisterCtrl = async (req:Request, res:Response) => {
             .status(200)
             .json({ response:'AH_SUCCESS_LOGIN', body:responseService });
     } catch (error) {
-        handleErrorHttp(res, 500, 'AH_ERR_LOGIN', error);
+        handleErrorHttp(res, 500, 'AH_ERR_REGISTER', error);
     }
 }
 
