@@ -1,6 +1,7 @@
 export interface History {
   createBy: number,
-  content: string
+  content: string,
+  tags: string
 }
 
 export interface File {
