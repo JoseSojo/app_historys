@@ -15,10 +15,11 @@ model Historys {
   fileId        Int      @unique
   fileReference Files    @relation(fields: [fileId], references: [fileId])
   createBy      Int
-  userReference Users     @relation(fields: [createBy], references: [userId])
-  date          DateTime  @default(now())
-  views         Int       @default(0)
+  userReference Users    @relation(fields: [createBy], references: [userId])
+  date          DateTime @default(now())
+  views         Int      @default(0)
   tags          String
+  content       String
 }
 
 model Coments {
@@ -31,7 +32,6 @@ model Coments {
 model Files {
   fileId   Int       @id @default(autoincrement())
   name     String
-  content  String
   type     String
   url      String
   Historys Historys?
@@ -44,4 +44,12 @@ model Users {
   password      String
   countHistorys Int
   Historys      Historys[]
+  roleId        Int        @default(2)
+  roleReference Roles      @relation(fields: [roleId], references: [roleId])
+}
+
+model Roles {
+  roleId Int     @id @default(autoincrement())
+  role   String
+  Users  Users[]
 }

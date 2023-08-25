@@ -1,0 +1,13 @@
+-- AlterTable
+ALTER TABLE `Users` ADD COLUMN `roleId` INTEGER NOT NULL DEFAULT 2;
+
+-- CreateTable
+CREATE TABLE `Roles` (
+    `roleId` INTEGER NOT NULL AUTO_INCREMENT,
+    `role` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`roleId`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `Users` ADD CONSTRAINT `Users_roleId_fkey` FOREIGN KEY (`roleId`) REFERENCES `Roles`(`roleId`) ON DELETE RESTRICT ON UPDATE CASCADE;
