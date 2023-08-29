@@ -18,7 +18,7 @@ model Historys {
   userReference Users    @relation(fields: [createBy], references: [userId])
   date          DateTime @default(now())
   views         Int      @default(0)
-  tags          String
+  tag           String
   content       String
 }
 
